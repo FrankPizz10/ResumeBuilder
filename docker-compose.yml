@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80" # Frontend accessible on port 3000
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000" # Backend accessible on port 5000
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY} # Pass the OpenAI API key from the host environment
